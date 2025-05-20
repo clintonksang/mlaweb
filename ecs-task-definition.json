@@ -1,0 +1,171 @@
+{
+    "family": "mls-taskdefinition",
+    "containerDefinitions": [
+        {
+            "name": "mla-container",
+            "image": "optimuswest/mkulima-loan-app:v1.0.3",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "mla-container-8000-tcp",
+                    "containerPort": 80,
+                    "hostPort": 8000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "APP_NAME",
+                    "value": "Mkulima Loan App"
+                },
+                {
+                    "name": "APP_ENV",
+                    "value": "production"
+                },
+                {
+                    "name": "APP_DEBUG",
+                    "value": "false"
+                },
+                {
+                    "name": "APP_URL",
+                    "value": "https://mkulima.com"
+                },
+                {
+                    "name": "APP_TIMEZONE",
+                    "value": "Africa/Nairobi"
+                },
+                {
+                    "name": "APP_LOCALE",
+                    "value": "en"
+                },
+                {
+                    "name": "APP_FALLBACK_LOCALE",
+                    "value": "en_US"
+                },
+                {
+                    "name": "DB_CONNECTION",
+                    "value": "mysql"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "your-rds-endpoint"
+                },
+                {
+                    "name": "DB_PORT",
+                    "value": "3306"
+                },
+                {
+                    "name": "DB_DATABASE",
+                    "value": "mkulima"
+                },
+                {
+                    "name": "BROADCAST_DRIVER",
+                    "value": "log"
+                },
+                {
+                    "name": "CACHE_DRIVER",
+                    "value": "file"
+                },
+                {
+                    "name": "FILESYSTEM_DISK",
+                    "value": "local"
+                },
+                {
+                    "name": "QUEUE_CONNECTION",
+                    "value": "database"
+                },
+                {
+                    "name": "SESSION_DRIVER",
+                    "value": "file"
+                },
+                {
+                    "name": "SESSION_LIFETIME",
+                    "value": "120"
+                },
+                {
+                    "name": "SESSION_ENCRYPT",
+                    "value": "false"
+                },
+                {
+                    "name": "REDIS_CLIENT",
+                    "value": "phpredis"
+                },
+                {
+                    "name": "REDIS_HOST",
+                    "value": "127.0.0.1"
+                },
+                {
+                    "name": "MAIL_MAILER",
+                    "value": "smtp"
+                },
+                {
+                    "name": "MAIL_HOST",
+                    "value": "your-smtp-host"
+                },
+                {
+                    "name": "MAIL_PORT",
+                    "value": "587"
+                },
+                {
+                    "name": "MAIL_ENCRYPTION",
+                    "value": "tls"
+                }
+            ],
+            "secrets": [
+                {
+                    "name": "APP_KEY",
+                    "valueFrom": "arn:aws:ssm:eu-north-1:381491963972:parameter/mkulima/app-key"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "valueFrom": "arn:aws:ssm:eu-north-1:381491963972:parameter/mkulima/db-username"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "valueFrom": "arn:aws:ssm:eu-north-1:381491963972:parameter/mkulima/db-password"
+                },
+                {
+                    "name": "MAIL_USERNAME",
+                    "valueFrom": "arn:aws:ssm:eu-north-1:381491963972:parameter/mkulima/mail-username"
+                },
+                {
+                    "name": "MAIL_PASSWORD",
+                    "valueFrom": "arn:aws:ssm:eu-north-1:381491963972:parameter/mkulima/mail-password"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/mls-taskdefinition",
+                    "mode": "non-blocking",
+                    "awslogs-create-group": "true",
+                    "max-buffer-size": "25m",
+                    "awslogs-region": "eu-north-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "executionRoleArn": "arn:aws:iam::381491963972:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "enableFaultInjection": false
+}

@@ -53,6 +53,23 @@ RUN mkdir -p /var/www/html/core/storage/framework/sessions \
 # Install dependencies
 RUN cd core && composer install --no-interaction --optimize-autoloader --no-dev --ignore-platform-reqs
 
+# Install Node.js and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g npm@latest
+
+# Copy setup script and set permissions
+COPY docker/setup-assets.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/setup-assets.sh
+
+# Set up the build environment
+RUN cd /var/www/html/core && \
+    rm -rf node_modules package-lock.json && \
+    npm install --platform=linux --arch=x64 && \
+    npm audit fix --force && \
+    npm rebuild && \
+    npm run build || true
+
 # Make sure the database directory exists and is writable
 RUN mkdir -p /var/www/html/core/database \
     && touch /var/www/html/core/database/database.sqlite \
@@ -60,16 +77,8 @@ RUN mkdir -p /var/www/html/core/database \
     && chmod -R 775 /var/www/html/core/database
 
 # Create an entrypoint script
-RUN echo '#!/bin/bash\n\
-cd /var/www/html/core\n\
-if [ ! -f .env ]; then\n\
-    cp .env.example .env\n\
-    php artisan key:generate\n\
-fi\n\
-php artisan migrate:fresh --seed --force\n\
-exec apache2-foreground\n\
-' > /usr/local/bin/docker-entrypoint.sh \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh
+COPY docker/docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expose port 80
 EXPOSE 80

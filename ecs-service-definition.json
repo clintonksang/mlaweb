@@ -1,0 +1,32 @@
+{
+    "cluster": "your-cluster-name",
+    "serviceName": "mkulima-loan-app",
+    "taskDefinition": "mkulima-loan-app",
+    "desiredCount": 2,
+    "launchType": "FARGATE",
+    "platformVersion": "LATEST",
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": [
+                "subnet-xxxxxxxx",
+                "subnet-yyyyyyyy"
+            ],
+            "securityGroups": [
+                "sg-xxxxxxxx"
+            ],
+            "assignPublicIp": "ENABLED"
+        }
+    },
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:region:account-id:targetgroup/your-target-group/xxxxxxxx",
+            "containerName": "mkulima-app",
+            "containerPort": 80
+        }
+    ],
+    "deploymentConfiguration": {
+        "maximumPercent": 200,
+        "minimumHealthyPercent": 100
+    },
+    "healthCheckGracePeriodSeconds": 60
+}
