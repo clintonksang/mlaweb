@@ -1,0 +1,78 @@
+FROM php:8.3-apache
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    sqlite3 \
+    libsqlite3-dev \
+    libsqlite3-0 \
+    libgmp-dev
+
+# Clear cache
+RUN apt-get clean && rm -rf /var/cache/apt/*
+
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd gmp
+
+# Install SQLite PDO driver
+RUN docker-php-ext-install pdo_sqlite
+
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy Apache virtual host file
+COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
+
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Copy application files
+COPY . /var/www/html/
+
+# Configure git to trust the repository
+RUN git config --global --add safe.directory /var/www/html
+
+# Set permissions for Laravel directories
+RUN mkdir -p /var/www/html/core/storage/framework/sessions \
+    && mkdir -p /var/www/html/core/storage/framework/views \
+    && mkdir -p /var/www/html/core/storage/framework/cache \
+    && mkdir -p /var/www/html/core/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/core/storage \
+    && chmod -R 775 /var/www/html/core/bootstrap/cache
+
+# Install dependencies
+RUN cd core && composer install --no-interaction --optimize-autoloader --no-dev --ignore-platform-reqs
+
+# Make sure the database directory exists and is writable
+RUN mkdir -p /var/www/html/core/database \
+    && touch /var/www/html/core/database/database.sqlite \
+    && chown -R www-data:www-data /var/www/html/core/database \
+    && chmod -R 775 /var/www/html/core/database
+
+# Create an entrypoint script
+RUN echo '#!/bin/bash\n\
+cd /var/www/html/core\n\
+if [ ! -f .env ]; then\n\
+    cp .env.example .env\n\
+    php artisan key:generate\n\
+fi\n\
+php artisan migrate:fresh --seed --force\n\
+exec apache2-foreground\n\
+' > /usr/local/bin/docker-entrypoint.sh \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Expose port 80
+EXPOSE 80
+
+# Start Apache with our entrypoint script
+CMD ["/usr/local/bin/docker-entrypoint.sh"]

@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: . # Build context is the project root
+      dockerfile: docker/dockerfile # Path to your Dockerfile
+    container_name: mkulima-app
+    ports:
+      - "8000:80" # Map host port 8000 to container port 80
+    volumes:
+      # Persist the SQLite database
+      - ./core/database:/var/www/html/core/database
+      # Optional: Mount your application code for live development
+      # If you uncomment this, remove or adjust the COPY . /var/www/html/ in Dockerfile for /core
+      # and run composer install, artisan commands manually or via an entrypoint script.
+      # - ./core:/var/www/html/core 
+      # - ./public:/var/www/html/public # If your public assets are in project_root/public
+      # - ./index.php:/var/www/html/index.php # If index.php is at project root
+    restart: unless-stopped

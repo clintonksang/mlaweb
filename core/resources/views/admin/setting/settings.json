@@ -1,0 +1,234 @@
+{
+    "general_setting": {
+        "keyword": [
+            "general",
+            "fundamental",
+            "site information",
+            "site",
+            "website settings",
+            "basic settings",
+            "global settings",
+            "site color",
+            "timezone",
+            "site currency",
+            "pagination",
+            "currency format",
+            "site title",
+            "base color",
+            "secondary color",
+            "paginate"
+        ],
+        "title": "General Settings",
+        "subtitle": "Configure the fundamental information of the site.",
+        "icon": "las la-cog",
+        "route_name": "admin.setting.general"
+    },
+    "categories": {
+        "keyword": [
+            "Loan Categories",
+            "Loan Types",
+            "Loan Variations",
+            "Loan Variant",
+            "Classification",
+            "Groups",
+            "Divisions"
+        ],
+        "title": "Loan Categories",
+        "subtitle": "Manage all loan categories",
+        "icon": "las la-layer-group",
+        "route_name": "admin.category.index"
+    },
+    "loan_plans": {
+        "keyword": [
+            "Loan Options",
+            "Loan Programs",
+            "Loan Schemes",
+            "Borrowing Plans",
+            "Financing Options",
+            "Credit Plans",
+            "Credit Options",
+            "Financial Plans",
+            "Loan Management",
+            "Loan Administration",
+            "Loan Configuration"
+        ],
+        "title": "Loan Plans",
+        "subtitle": "Manage all of your loan plans",
+        "icon": "las la-chart-bar",
+        "route_name": "admin.plans.loan.index"
+    },
+    "documents": {
+        "keyword": [
+            "Loan Documents",
+            "Loan Paperwork",
+            "Loan Agreements",
+            "Loan Contracts",
+            "Loan Forms",
+            "Loan Applications",
+            "Loan Files",
+            "Loan Records",
+            "Loan Documentation",
+            "Loan Information",
+            "Loan Data"
+        ],
+        "title": "Loan Documents",
+        "subtitle": "Manage all loan documents",
+        "icon": "las la-file-alt",
+        "route_name": "admin.document.index"
+    },
+    "countries": {
+        "keyword": [
+            "countries",
+            "country",
+            "location",
+            "region",
+            "nation",
+            "territory",
+            "state",
+            "area",
+            "place",
+            "locale"
+        ],
+        "title": "Countries and Regions",
+        "subtitle": "Manage all countries of the system.",
+        "icon": "las la-globe-africa",
+        "route_name": "admin.country.index"
+    },
+    "logo_favicon": {
+        "keyword": [
+            "branding",
+            "identity",
+            "logo upload",
+            "site branding",
+            "brand identity",
+            "favicon",
+            "website icon",
+            "website favicon",
+            "website logo"
+        ],
+        "title": "Logo and Favicon",
+        "subtitle": "Upload your logo and favicon here.",
+        "icon": "las la-images",
+        "route_name": "admin.setting.logo.icon"
+    },
+    "system_configuration": {
+        "keyword": [
+            "basic modules",
+            "control",
+            "modules",
+            "system",
+            "configuration settings",
+            "system control",
+            "force ssl",
+            "force secure password",
+            "kyc control",
+            "email control",
+            "sms control",
+            "verification control",
+            "push notification control",
+            "language control",
+            "mobile verification",
+            "email verification",
+            "in app payment"
+        ],
+        "title": "System Configuration",
+        "subtitle": "Control all of the basic modules of the system.",
+        "icon": "las la-cogs",
+        "route_name": "admin.setting.system.configuration"
+    },
+    "payment_gateways": {
+        "keyword": [
+            "automatic",
+            "manual",
+            "configure payment gateways",
+            "aamarpay",
+            "amarpay",
+            "authorize",
+            "autorize.net",
+            "btcpay",
+            "btc pay",
+            "binance",
+            "blockchain",
+            "cashmaal",
+            "checkout",
+            "coinbase commerce",
+            "coingate",
+            "coinpayments",
+            "flutterwave",
+            "instamojo",
+            "mercado pago",
+            "mollie",
+            "nmi",
+            "now payments",
+            "nowpayments",
+            "payeer",
+            "paypal",
+            "paystack",
+            "paytm",
+            "perfect money",
+            "perfectmoney",
+            "razorpay",
+            "skrill",
+            "sslcommerz",
+            "stripe",
+            "twocheckout",
+            "two checkout",
+            "2checkout"
+        ],
+        "title": "Payment Gateways",
+        "subtitle": "Configure automatic or manual payment gateways to accept payment from users.",
+        "icon": "las la-credit-card",
+        "route_name": "admin.gateway.automatic.index"
+    },
+    "withdrawals_methods": {
+        "keyword": [
+            "manual withdrawal",
+            "payout",
+            "payment withdrawal",
+            "withdrawal options",
+            "withdrawal settings",
+            "payout methods",
+            "payout settings",
+            "configure withdrawals",
+            "configure payouts"
+        ],
+        "title": "Disbursment Methods",
+        "subtitle": "Setup manual disbursment methods so that users of the system can make payout requests through those methods.",
+        "icon": "la la-bank",
+        "route_name": "admin.withdraw.method.index"
+    },
+    "kyc_setting": {
+        "keyword": [
+            "KYC",
+            "verification",
+            "kyc verification",
+            "identity verification",
+            "KYC settings",
+            "client verification",
+            "KYC configuration",
+            "customer verification"
+        ],
+        "title": "KYC Setting",
+        "subtitle": "Configure the dynamic input field to collect information of your client if you need.",
+        "icon": "las la-user-check",
+        "route_name": "admin.kyc.setting"
+    },
+    "cron_job_setting": {
+        "keyword": [
+            "cron job",
+            "automate operations",
+            "schedule",
+            "automate",
+            "tasks",
+            "cron job settings",
+            "task scheduling",
+            "automation settings",
+            "configure cron job",
+            "configure tasks"
+        ],
+        "title": "Cron Job Setting",
+        "subtitle": "Configure cron job to automate some operations of the system.",
+        "icon": "las la-clock",
+        "route_name": "admin.cron.index"
+    }
+}
