@@ -6,4 +6,5 @@ run:
 
 push:
 	docker push optimuswest/mkulima-loan-app:v1.0.6
+	
 
