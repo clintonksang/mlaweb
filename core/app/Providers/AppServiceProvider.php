@@ -86,6 +86,12 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
 
+        // Force HTTPS URLs when request is over HTTPS (for ngrok tunnels, etc.)
+        if (request()->isSecure() || request()->header('X-Forwarded-Proto') === 'https') {
+            \URL::forceScheme('https');
+            \URL::forceRootUrl(request()->getSchemeAndHttpHost());
+        }
+
         Paginator::useBootstrapFive();
 
         View::addNamespace('Template', resource_path('views/templates/' . activeTemplateName()));
