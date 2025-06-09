@@ -38,7 +38,7 @@ class LoanController extends Controller {
     public function plans() {
 
         $notify[] = 'Loan Plans';
-        $categories = Category::where('Status', Status::ENABLE)->with('plans')->whereHas('plans', function ($query) {
+        $categories = Category::where('status', Status::ENABLE)->with('plans')->whereHas('plans', function ($query) {
             $query->where('status', Status::ENABLE);
         })->latest()->get();
 
