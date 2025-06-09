@@ -46,9 +46,11 @@ RUN mkdir -p /var/www/html/core/storage/framework/sessions \
     && mkdir -p /var/www/html/core/storage/framework/views \
     && mkdir -p /var/www/html/core/storage/framework/cache \
     && mkdir -p /var/www/html/core/bootstrap/cache \
+    && mkdir -p /var/www/html/core/public \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/core/storage \
-    && chmod -R 775 /var/www/html/core/bootstrap/cache
+    && chmod -R 775 /var/www/html/core/bootstrap/cache \
+    && chmod -R 775 /var/www/html/core/public
 
 # Install dependencies
 RUN cd core && composer install --no-interaction --optimize-autoloader --no-dev --ignore-platform-reqs
