@@ -7,3 +7,7 @@ build:
 run:
 	$(COMPOSE) up -d --build       # -d now legal because 'compose' exists
 	@echo "🚀 App on http://localhost:8000"
+logs:                             ## Follow logs (all) or `make logs SERVICE=php`
+	$(COMPOSE) logs -f --tail=50 $(SERVICE)
+
+.PHONY: logs
