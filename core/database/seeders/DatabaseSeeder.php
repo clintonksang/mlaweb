@@ -10,6 +10,7 @@ use Database\Seeders\LoanPlanSeeder;
 use Database\Seeders\LanguageSeeder;
 use Database\Seeders\GeneralSettingsSeeder;
 use Database\Seeders\AdminSeeder;
+use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             LoanPlanSeeder::class,
             LanguageSeeder::class,
             GeneralSettingsSeeder::class,
+            UserSeeder::class,
         ]);
     }
 } 
