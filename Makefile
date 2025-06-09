@@ -1,5 +1,5 @@
-COMPOSE = docker compose
-       # or docker-compose if you installed the old tool
+COMPOSE ?= docker compose
+# or docker-compose if you installed the old tool
 
 build:
 	$(COMPOSE) build --pull        # no hard-coded path needed
@@ -13,7 +13,7 @@ logs:                             ## Follow logs (all) or `make logs SERVICE=php
 stop:
 	$(COMPOSE) down
 
-ARTISAN = $(COMPOSE) exec -T php php /var/www/html/core/artisan
+ARTISAN ?= $(COMPOSE) exec -T php php /var/www/html/core/artisan
 
 migrate:
 	$(ARTISAN) migrate
