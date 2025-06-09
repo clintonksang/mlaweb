@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\AuthorizationController;
 use App\Http\Controllers\Api\WithdrawController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\TicketController;
+use App\Http\Controllers\Api\ProspectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,7 +65,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::middleware(['check.status'])->group(function () {
-
 
         Route::middleware('registration.complete')->group(function () {
 
@@ -132,6 +132,15 @@ Route::middleware('auth:sanctum')->group(function () {
                 Route::post('reply/{id}', 'replyTicket');
                 Route::post('close/{id}', 'closeTicket');
                 Route::get('download/{attachment_id}', 'ticketDownload');
+            });
+
+            // Prospects API
+            Route::controller(ProspectController::class)->prefix('prospects')->group(function () {
+                Route::get('/', 'index');                    // GET /api/prospects
+                Route::post('/', 'store');                   // POST /api/prospects
+                Route::get('{uuid}', 'show');               // GET /api/prospects/{uuid}
+                Route::put('{uuid}', 'update');             // PUT /api/prospects/{uuid}
+                Route::delete('{uuid}', 'destroy');         // DELETE /api/prospects/{uuid}
             });
 
         });
