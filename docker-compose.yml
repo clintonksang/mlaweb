@@ -1,18 +1,44 @@
+# services:
+#   app:
+#     build:
+#       context: . # Build context is the project root
+#       dockerfile: docker/dockerfile # Path to your Dockerfile
+#     container_name: mkulima-app
+#     ports:
+#       - "8000:80" # Map host port 8000 to container port 80
+#     volumes:
+#       # Persist the SQLite database
+#       - ./core/database:/var/www/html/core/database
+#       # Optional: Mount your application code for live development
+#       # If you uncomment this, remove or adjust the COPY . /var/www/html/ in Dockerfile for /core
+#       # and run composer install, artisan commands manually or via an entrypoint script.
+#       # - ./core:/var/www/html/core 
+#       # - ./public:/var/www/html/public # If your public assets are in project_root/public
+#       # - ./index.php:/var/www/html/index.php # If index.php is at project root
+#     restart: unless-stopped
+version: "3.9"
+
 services:
-  app:
+  php:
     build:
-      context: . # Build context is the project root
-      dockerfile: docker/dockerfile # Path to your Dockerfile
-    container_name: mkulima-app
-    ports:
-      - "8000:80" # Map host port 8000 to container port 80
-    volumes:
-      # Persist the SQLite database
-      - ./core/database:/var/www/html/core/database
-      # Optional: Mount your application code for live development
-      # If you uncomment this, remove or adjust the COPY . /var/www/html/ in Dockerfile for /core
-      # and run composer install, artisan commands manually or via an entrypoint script.
-      # - ./core:/var/www/html/core 
-      # - ./public:/var/www/html/public # If your public assets are in project_root/public
-      # - ./index.php:/var/www/html/index.php # If index.php is at project root
+      context: .
+      dockerfile: docker/php.dockerfile
+    container_name: mkulima-php
     restart: unless-stopped
+    volumes:
+      - ./core:/var/www/html/core            # hot-reload for dev
+      - ./core/database:/var/www/html/core/database
+    expose:
+      - "9000"
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: mkulima-nginx
+    restart: unless-stopped
+    depends_on:
+      - php
+    volumes:
+      - ./core:/var/www/html/core:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - "8000:80"          # host:container

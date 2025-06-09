@@ -1,4 +1,8 @@
-FROM php:8.3-apache
+FROM php:8.3-fpm
+# docker/nginx.dockerfile  – just nginx, no Apache
+FROM nginx:stable-alpine
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+
 
 # Set working directory
 WORKDIR /var/www/html
