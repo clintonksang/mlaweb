@@ -26,22 +26,25 @@ class LoanPlanSeeder extends Seeder
             }
 
             $loanPlans[] = [
-                'category_id'         => $categoryId,
-                'name'                => $plan['name'],
-                'minimum_amount'      => $plan['minimum_amount'],
-                'maximum_amount'      => $plan['maximum_amount'],
-                'per_installment'     => $plan['per_installment'],
-                'installment_interval'=> $plan['installment_interval'],
-                'total_installment'   => $plan['total_installment'],
-                'installment_amount'  => $plan['installment_amount'],
-                'late_fee'            => $plan['late_fee'] ?? 0,
-                'interval_day'        => $plan['interval_day'] ?? 0,
-                'fixed_late_fee'      => $plan['fixed_late_fee'] ?? 0,
-                'percent_late_fee'    => $plan['percent_late_fee'] ?? 0,
-                'instruction'         => $plan['instruction'] ?? null,
-                'status'              => $plan['status'] ?? 1,
-                'created_at'          => now(),
-                'updated_at'          => now(),
+                'category_id'                => $categoryId,
+                'name'                       => $plan['name'],
+                'title'                      => $plan['title'] ?? $plan['name'],
+                'minimum_amount'             => $plan['minimum_amount'],
+                'maximum_amount'             => $plan['maximum_amount'],
+                'per_installment'            => $plan['per_installment'],
+                'installment_interval'       => $plan['installment_interval'],
+                'total_installment'          => $plan['total_installment'],
+                'delay_value'                => $plan['delay_value'] ?? 7,
+                'fixed_charge'               => $plan['fixed_charge'] ?? 0,
+                'percent_charge'             => $plan['percent_charge'] ?? 0,
+                'is_featured'                => $plan['is_featured'] ?? 0,
+                'application_fixed_charge'   => $plan['application_fixed_charge'] ?? 0,
+                'application_percent_charge' => $plan['application_percent_charge'] ?? 0,
+                'instruction'                => $plan['instruction'] ?? null,
+                'status'                     => $plan['status'] ?? 1,
+                'form_id'                    => 0, // Default to 0, can be updated later
+                'created_at'                 => now(),
+                'updated_at'                 => now(),
             ];
         }
 
