@@ -13,15 +13,6 @@ logs:                             ## Follow logs (all) or `make logs SERVICE=php
 stop:
 	$(COMPOSE) down
 
-ARTISAN ?= $(COMPOSE) exec -T php php /var/www/html/core/artisan
 
-migrate:
-	$(ARTISAN) migrate
-
-seed:
-	$(ARTISAN) db:seed
-
-refresh:
-	$(ARTISAN) migrate:fresh --seed
 
 .PHONY: logs migrate seed refresh
