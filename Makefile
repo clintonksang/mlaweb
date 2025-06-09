@@ -1,4 +1,4 @@
-COMPOSE = docker-compose
+COMPOSE = docker compose
        # or docker-compose if you installed the old tool
 
 build:
