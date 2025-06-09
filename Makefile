@@ -10,4 +10,12 @@ run:
 logs:                             ## Follow logs (all) or `make logs SERVICE=php`
 	$(COMPOSE) logs -f --tail=50 $(SERVICE)
 
+stop:
+	$(COMPOSE) down
+
+
+
+
+
+
 .PHONY: logs

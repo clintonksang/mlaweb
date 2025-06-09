@@ -13,4 +13,4 @@ COPY core /var/www/html/core
 
 RUN cd core && composer install --no-dev --prefer-dist --no-interaction
 
-CMD ["php-fpm"]          # php-fpm is PID 1
+CMD ["php-fpm", "-F"]
